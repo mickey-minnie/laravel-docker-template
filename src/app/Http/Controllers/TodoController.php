@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
+    private $todo;
+
+    public function __construct(Todo $todo)
+    {
+        $this->todo = $todo;
+    }
+
     public function index()
     {
-        $todo = new Todo();
-        $todoList = $todo->all(); //todosテーブルの全レコードを連想配列で取得
+        $todoList = $this->todo->all();
 
         return view('todo.index', ['todoList' => $todoList]);
     }
@@ -24,10 +30,15 @@ class TodoController extends Controller
     {
         $inputs = $request->all();
 
-        $todo = new Todo(); 
-        $todo->fill($inputs);
-        $todo->save();
+        $this->todo->fill($inputs); // 変更
+        $this->todo->save(); // 変更
 
         return redirect()->route('todo.index');
+    }
+
+    public function show($id)
+    {
+        $todo = $this->todo->find($id);
+        return view('todo.show', ['todo' => $todo]);
     }
 }
