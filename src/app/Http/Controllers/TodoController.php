@@ -10,7 +10,7 @@ class TodoController extends Controller
     public function index()
     {
         $todo = new Todo();
-        $todoList = $todo->all();
+        $todoList = $todo->all(); //todosテーブルの全レコードを連想配列で取得
 
         return view('todo.index', ['todoList' => $todoList]);
     }
@@ -31,4 +31,11 @@ class TodoController extends Controller
         return redirect()->route('todo.index');
     }
 
+    public function show($id)
+    {
+        $model = new Todo();
+        $todo = $model->find($id);
+
+        return view('todo.show', ['todo' => $todo]);
+    }
 }
