@@ -10,7 +10,8 @@ class TodoController extends Controller
     public function index()
     {
         $todo = new Todo();
-        $todoList = $todo->all(); //todosテーブルの全レコードを連想配列で取得
+        $todoList = $todo->all();
+        // $todoList は Collectionクラス
 
         return view('todo.index', ['todoList' => $todoList]);
     }
