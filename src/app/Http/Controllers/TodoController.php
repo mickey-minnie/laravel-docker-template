@@ -22,7 +22,7 @@ class TodoController extends Controller
 
     public function store(Request $request)
     {
-        $inputs = $request->all();
+        $inputs = $request->all(); // 入力値を連想配列で取得
 
         $todo = new Todo(); 
         $todo->fill($inputs);
